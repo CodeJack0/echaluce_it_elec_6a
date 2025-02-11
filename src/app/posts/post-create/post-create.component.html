@@ -1,13 +1,17 @@
 <body>
 
-    <h2>Hellow World</h2>
-<div class="container">
-    <textarea [(ngModel)]="enteredValue"></textarea>
-    <br>
-<button (click)="onAddPost()">Save</button>
- {{newPost}}
-</div>
-
+   <mat-card>
+    <mat-form-field>
+        <input matInput type="text" [(ngModel)]="enteredTitle" placeholder="Title">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea rows="6" matInput [(ngModel)]="enteredContent" [ngModelOptions]="{standalone: true}" placeholder="Content"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onAddPost()">Save</button>
+   </mat-card>
+   
+   
+   
 
 </body>
 
