@@ -1,13 +1,27 @@
-
-.container{
+mat-card {
     display: flex;
     justify-content: center;
-}
-
-textarea {
-    width: 50%;
-    border: 2px solid #000;
-    background-color: #ffffff;
+    align-items: center;
+    height: 100vh; /* Ensures it takes the full height of the viewport */
     padding: 20px;
-    text-align: center;
-}
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Optional: max width for better layout */
+  }
+  
+  mat-form-field {
+    margin-bottom: 16px; /* Adds spacing between form fields */
+  }
+  
+  mat-error {
+    color: red; /* Ensures error messages are styled properly */
+  }
+  
+  button {
+    margin-top: 16px;
+  }
+  
