@@ -11,6 +11,8 @@ mat-card {
     flex-direction: column;
     width: 100%;
     max-width: 500px; /* Optional: max width for better layout */
+    padding: 20px;
+    background-color: #ccc;
   }
   
   mat-form-field {
