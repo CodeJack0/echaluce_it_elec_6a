@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require ('express');
 
 const app = express();
-const bodyParser =require('body-parser')
+const bodyParser =require('body-parser');
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
