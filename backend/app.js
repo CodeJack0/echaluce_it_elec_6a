@@ -1,7 +1,21 @@
 const express = require ('express');
+const mongoose = require ('mongoose');
 
 const app = express();
 const bodyParser =require('body-parser');
+
+const Post = require('./models/post');
+
+mongoose.connect("mongodb+srv://diobrando00122:M6WFeiQic5OvLcOs@cluster0.rmawf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.then(() => {
+    console.log('Connected to database');
+})
+.catch(() => {
+    console.log('Connection Failed');
+})
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -13,12 +27,15 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next)=> {
-    const post = req.body;
-    console.log(post);
+    const post = new Post ({
+     title: req.body.title,
+     content: req.body.content
+    });
+
+    post.save();
     res.status(201).json({
-        message: 'Post added Successfully',
-        post: post
-    })
+        message: 'Post added Successfully'
+    });
 })
 
 
@@ -41,8 +58,8 @@ app.use('/api/posts',(req, res, next) => {
         message: 'Posts Successfully fetched',
         posts: posts
     });
-    next();
+    
 
-})
+});
 
 module.exports = app;

@@ -20,7 +20,7 @@ const onError = error => {
         throw error;
     }
 
-    const bind = typeof addr === "string" ? "pipe" + addn:"port" + port;
+    const bind = typeof addr === "string" ? "pipe" + addr:"port" + port;
     switch (error.code){
         case "EACCESS":
             console.error(bind + "requires elevated privileges");
