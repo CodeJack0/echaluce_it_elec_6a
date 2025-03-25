@@ -1,29 +1,45 @@
 mat-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-    padding: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 500px; /* Optional: max width for better layout */
-    padding: 20px;
-    background-color: #ccc;
-  }
-  
-  mat-form-field {
-    margin-bottom: 16px; /* Adds spacing between form fields */
-  }
-  
-  mat-error {
-    color: red; /* Ensures error messages are styled properly */
-  }
-  
-  button {
-    margin-top: 16px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* Ensures full-screen centering */
+  padding: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;  /* Optional: controls the width for smaller screens */
+  padding: 20px;
+  background-color: #000000;  /* Darker container background to differentiate from mat-card */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Slight shadow for elevation */
+}
+
+mat-form-field {
+  margin-bottom: 16px;  /* Spacing between form fields */
+}
+
+mat-error {
+  color: red;  /* Error message styling */
+}
+
+button {
+  margin-top: 16px;
+}
+
+input[type="file"] {
+  visibility: hidden;  /* Hides the file input */
+}
+
+.picker {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;  /* Adds space below the image picker */
+}
+
+button[mat-stroked-button] {
+  color: white;
+  border-color: white;
+}

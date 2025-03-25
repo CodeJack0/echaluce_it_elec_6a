@@ -1,41 +1,29 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form #postForm="ngForm" (ngSubmit)="onSavePost(postForm)">
-      <!-- Title Input Field -->
-      <mat-form-field>
-          <input
-              matInput
-              type="text"
-              name="title"
-              [(ngModel)]="post.title"  
-              required
-              minlength="3"
-              placeholder="Enter Title Here"
-              #title="ngModel">
-          <mat-error *ngIf="title.invalid && title.touched">Enter a valid title</mat-error>
-      </mat-form-field>
-
-
-      <!-- Content Textarea -->
-      <mat-form-field>
-          <textarea
-              rows="6"
-              matInput
-              name="content"
-              [(ngModel)]="post.content"  
-              required
-              placeholder="Content"
-              #content="ngModel"></textarea>
-          <mat-error *ngIf="content.invalid && content.touched">Content is required</mat-error>
-      </mat-form-field>
-
-
-      <!-- Submit Button -->
-      <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid">
+<form [formGroup]="form" (submit)="onAddPost()" *ngIf="!isLoading">
+    <mat-card>
+      <div class="form-container">
+        <mat-form-field>
+          <input matInput type="text" formControlName="title" placeholder="Enter Title Here">
+          <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+            This field is required (min 3 characters)
+          </mat-error>
+        </mat-form-field>
+  
+        <div class="picker">
+          <button mat-stroked-button type="button" (click)="filepicker.click()">Pick Image</button>
+          <input type="file" #filepicker>
+        </div>
+  
+        <mat-form-field>
+          <textarea matInput rows="6" formControlName="content" placeholder="Enter Content Here"></textarea>
+          <mat-error *ngIf="form.get('content')?.invalid && form.get('content')?.touched">
+            Content is required
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
           {{ mode === 'edit' ? 'Update' : 'Save' }}
-      </button>
+        </button>
+      </div>
+    </mat-card>
   </form>
-</mat-card>
-
-
-
+  
