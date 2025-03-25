@@ -1,6 +1,6 @@
-<form [formGroup]="form" (submit)="onAddPost()" *ngIf="!isLoading">
-    <mat-card>
-      <div class="form-container">
+<mat-card>
+    <div class="form-container">
+      <form [formGroup]="form" (submit)="onAddPost()" *ngIf="!isLoading">
         <mat-form-field>
           <input matInput type="text" formControlName="title" placeholder="Enter Title Here">
           <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
@@ -9,8 +9,15 @@
         </mat-form-field>
   
         <div class="picker">
-          <button mat-stroked-button type="button" (click)="filepicker.click()">Pick Image</button>
-          <input type="file" #filepicker>
+          <button mat-stroked-button type="button" (click)="filepicker.click()">
+            Pick Image
+          </button>
+        </div>
+        <input type="file" #filepicker (change)="PickedImage($event)" accept="image/*">
+  
+        <!-- Image preview -->
+        <div class="image-preview" *ngIf="Pickedimage">
+          <img [src]="Pickedimage" [alt]="form.value.title">
         </div>
   
         <mat-form-field>
@@ -20,10 +27,10 @@
           </mat-error>
         </mat-form-field>
   
-        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || isLoading">
           {{ mode === 'edit' ? 'Update' : 'Save' }}
         </button>
-      </div>
-    </mat-card>
-  </form>
+      </form>
+    </div>
+  </mat-card>
   

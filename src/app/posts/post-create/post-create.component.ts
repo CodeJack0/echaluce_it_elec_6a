@@ -5,6 +5,8 @@ import { PostsService } from "../posts.service";
 import { Post } from "../post.model";
 
 
+
+
 @Component({
   selector: "app-post-create",
   templateUrl: "./post-create.component.html",
@@ -16,6 +18,9 @@ export class PostCreateComponent implements OnInit {
   postId: string | null = null;
   isLoading = false;
   form!: FormGroup;
+  Pickedimage: string | null = null;
+
+
 
 
   constructor(
@@ -25,13 +30,18 @@ export class PostCreateComponent implements OnInit {
   ) {}
 
 
+
+
   ngOnInit(): void {
     this.isLoading = false;
    
     this.form = new FormGroup({  
       title: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
-      content: new FormControl(null, { validators: [Validators.required] })  
+      content: new FormControl(null, { validators: [Validators.required] }),  
+      image: new FormControl(null, {validators:[Validators.required]})
     });
+
+
 
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -39,6 +49,8 @@ export class PostCreateComponent implements OnInit {
         this.mode = 'edit';
         this.postId = paramMap.get('postId');
         this.isLoading = true;
+
+
 
 
         if (this.postId) {
@@ -51,8 +63,8 @@ export class PostCreateComponent implements OnInit {
             };
             this.form.setValue({  
               title: this.post.title,  
-              content: this.post.content  
-            });  
+              content: this.post.content
+             });  
           });
         }
       } else {
@@ -61,6 +73,21 @@ export class PostCreateComponent implements OnInit {
         this.post = { id: '', title: '', content: '' };
       }
     });
+  }
+
+
+  PickedImage(event: Event) {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
+    if (!file) {
+      return;
+    }    
+    this.form.patchValue({image: file});
+    this.form.get('image')?.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.Pickedimage = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 
 
@@ -73,14 +100,21 @@ export class PostCreateComponent implements OnInit {
       this.postsService.addPost(this.form.value.title, this.form.value.content);  
     } else {  
       this.postsService.updatePost(
-        this.postId!, // Non-null assertion operator
+        this.postId!,
         this.form.value.title,
         this.form.value.content
       );
     }
     this.form.reset();  
+    this.Pickedimage = null;
   }
 }
+
+
+
+
+
+
 
 
 
