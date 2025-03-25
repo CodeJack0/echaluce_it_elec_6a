@@ -18,6 +18,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import { AppRoutingModule } from './app-routing.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import {MatInputModule} from '@angular/material/input';
     PostListComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
@@ -38,6 +41,7 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     HttpClientModule
   ],
   providers: [],

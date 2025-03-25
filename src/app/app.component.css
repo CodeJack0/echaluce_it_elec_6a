@@ -1,0 +1,12 @@
+body{
+    margin: 0;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main{
+    gap: 20px;
+    padding: 40px;
+    width: 80%;
+    margin: 0 auto;
+}

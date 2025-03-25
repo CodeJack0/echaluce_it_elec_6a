@@ -2,7 +2,7 @@ mat-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ensures it takes the full height of the viewport */
+    height: 100vh; 
     padding: 20px;
   }
   

@@ -1,44 +1,41 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form #postForm="ngForm" (ngSubmit)="onSavePost(postForm)">
+      <!-- Title Input Field -->
+      <mat-form-field>
+          <input
+              matInput
+              type="text"
+              name="title"
+              [(ngModel)]="post.title"  
+              required
+              minlength="3"
+              placeholder="Enter Title Here"
+              #title="ngModel">
+          <mat-error *ngIf="title.invalid && title.touched">Enter a valid title</mat-error>
+      </mat-form-field>
 
 
-   <mat-card>
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
-    <mat-form-field>
-        <input matInput type="text" name="title"
-        ngModel 
-        required 
-        #title="ngModel" 
-        placeholder="Title">
-        <mat-error *ngIf="title.invalid">
-            Enter a Title
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <textarea rows="6" 
-        matInput 
-        name="content"
-        ngModel="" required
-        #content="ngModel"
-        placeholder="Content">
-      </textarea>
-      <mat-error *ngIf="content.invalid">
-        Enter a Content
-      </mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Save</button>
-   </form>
-   </mat-card>
+      <!-- Content Textarea -->
+      <mat-form-field>
+          <textarea
+              rows="6"
+              matInput
+              name="content"
+              [(ngModel)]="post.content"  
+              required
+              placeholder="Content"
+              #content="ngModel"></textarea>
+          <mat-error *ngIf="content.invalid && content.touched">Content is required</mat-error>
+      </mat-form-field>
 
 
-   
-   
-
-
-
-
-
-
-
-
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid">
+          {{ mode === 'edit' ? 'Update' : 'Save' }}
+      </button>
+  </form>
+</mat-card>
 
 
 
