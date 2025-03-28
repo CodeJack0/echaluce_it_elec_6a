@@ -5,8 +5,11 @@ const mongoose = require("mongoose");
 const postroutes = require("./routes/posts"); // Import grouped routes
 
 
+
 const app = express();
 
+const path = require("path");
+app.use("/images", express.static(path.join("backend/images")));
 
 mongoose.connect("mongodb+srv://diobrando00122:M6WFeiQic5OvLcOs@cluster0.rmawf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {

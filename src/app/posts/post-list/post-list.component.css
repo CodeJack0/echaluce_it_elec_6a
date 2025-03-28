@@ -1,4 +1,8 @@
-a {
-    text-decoration: none;
-    
-}
+.small-image {
+    width: 100px;  
+    height: auto;  
+    border-radius: 8px;  
+    margin: 10px 0;  
+    object-fit: cover;  
+  }
+  
