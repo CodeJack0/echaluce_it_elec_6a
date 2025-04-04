@@ -6,3 +6,14 @@
     object-fit: cover;  
   }
   
+  mat-paginator{  
+    margin-top: 1rem;  
+  }  
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+  }
+  

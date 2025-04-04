@@ -20,7 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {ReactiveFormsModule} from '@angular/forms';  
+import {ReactiveFormsModule} from '@angular/forms'; 
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';   
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     ReactiveFormsModule

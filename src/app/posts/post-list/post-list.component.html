@@ -1,4 +1,7 @@
 <mat-card>
+  <div *ngIf="Loading" class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner> <!-- Spinner with diameter of 50px -->
+  </div>
     <mat-accordion multi="true" *ngIf="posts.length >= 0">
       <mat-expansion-panel *ngFor="let post of posts">
         <mat-expansion-panel-header>{{ post.title }}</mat-expansion-panel-header>
@@ -12,6 +15,12 @@
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
-    <p *ngIf="posts.length <= 0">No post added yet</p>
+    <mat-paginator 
+    [length]= "totalposts" 
+    [pageSize]= "postperpage"  
+   [pageSizeOptions]= "pageSizeOption" 
+   (page)= "onChangedPage($event)">  
+</mat-paginator>  
+    <p *ngIf="posts.length <= 0">No post added yet</p> 
   </mat-card>
   
