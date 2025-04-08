@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import {PostCreateComponent} from './posts/post-create/post-create.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+
 import { PostsService } from './posts/posts.service';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +32,9 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
     AppComponent,
     PostCreateComponent,
     HeaderComponent,
-    PostListComponent
+    PostListComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     AppRoutingModule,

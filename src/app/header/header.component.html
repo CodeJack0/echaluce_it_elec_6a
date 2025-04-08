@@ -1,12 +1,16 @@
 <mat-toolbar>
   <span class="spacer">
-      <a routerLink = "/">  
-          Posts
-        </a>  
+    <a routerLink="/">Posts</a>
   </span>
-  <ul>  
-      <li>  
-        <a mat-button routerLink = "/create"> Add Post</a>  
-      </li>  
+  <ul class="nav-links">
+    <li>
+      <a mat-button routerLink="/create">Add Post</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/signup">Signup</a>
+    </li>
   </ul>
 </mat-toolbar>

@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const postroutes = require("./routes/posts"); // Import grouped routes
-
+const postroutes = require("./routes/posts"); 
+const  userRoutes = require("./routes/user");  
 
 
 const app = express();
@@ -39,6 +39,7 @@ app.use((req,res, next)=>{
 app.use(cors());
 
 app.use("/api/posts", postroutes); 
+app.use("/api/user", userRoutes);  
 module.exports = app;
 
 
