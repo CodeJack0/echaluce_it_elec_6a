@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from "../auth.service";  
 
 @Component({
   selector: 'app-signup',
@@ -9,22 +10,27 @@ import { NgForm } from '@angular/forms';
 export class SignupComponent {
   Loading = false;
 
-  onSignup(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
+  constructor(public authService: AuthService) {}  
 
+  onSignup(form: NgForm) {  
+    if (form.invalid) {  
+      return;  
+    }  
+    
     this.Loading = true;
+
     const email = form.value.email;
     const password = form.value.password;
 
     console.log('Signup Email:', email);
     console.log('Signup Password:', password);
 
-    // Simulate user registration
+    this.authService.CreateUser(email, password);
+
+    // Optional simulation or loading state
     setTimeout(() => {
       this.Loading = false;
       alert("Signed up successfully (simulation)");
     }, 1500);
-  }
+  }  
 }
