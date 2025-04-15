@@ -7,11 +7,9 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignupComponent } from './authentication/signup/signup.component';
-
 import { PostsService } from './posts/posts.service';
-
-import { HttpClientModule } from '@angular/common/http';
-
+import { AuthInterceptor } from './authentication/auth-interceptor'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
@@ -53,7 +51,11 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true  
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
