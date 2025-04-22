@@ -11,26 +11,19 @@ export class SignupComponent {
   Loading = false;
 
   constructor(public authService: AuthService) {}  
-
   onSignup(form: NgForm) {  
     if (form.invalid) {  
       return;  
-    }  
-    
+    }   
     this.Loading = true;
-
     const email = form.value.email;
     const password = form.value.password;
-
     console.log('Signup Email:', email);
     console.log('Signup Password:', password);
-
-    this.authService.CreateUser(email, password);
-
-    // Optional simulation or loading state
+    this.authService.createUser(email, password);
     setTimeout(() => {
       this.Loading = false;
       alert("Signed up successfully (simulation)");
     }, 1500);
   }  
-}
+}  

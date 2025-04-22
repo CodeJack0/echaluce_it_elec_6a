@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken"); 
+const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+
 
 
 router.post("/signup", (req, res, next) => {
@@ -15,56 +16,65 @@ router.post("/signup", (req, res, next) => {
       return user.save();
     })
     .then(result => {
-      res.status(201).json({
-        message: "User created!",
-        result: result
-      });
+      if (!res.headersSent) {  
+        res.status(201).json({
+          message: "User created!",
+          result: result
+        });
+      }
     })
     .catch(err => {
-      res.status(500).json({
-        message: "Invalid authentication credentials!"
-      });
+      if (!res.headersSent) {  
+        res.status(500).json({
+          message: "Invalid authentication credentials!"
+        });
+      }
     });
 });
+
 
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
 
-  
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
-        
-        return res.status(401).json({ message: "Auth failed: Email not found" });
+        if (!res.headersSent) {
+          return res.status(401).json({ message: "Auth failed: Email not found" });
+        }
       }
 
-      fetchedUser = user; 
-      return bcrypt.compare(req.body.password, user.password); 
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
       if (!result) {
-        return res.status(401).json({ message: "Auth failed: Incorrect password" });
+        if (!res.headersSent) {
+          return res.status(401).json({ message: "Auth failed: Incorrect password" });
+        }
       }
 
-      
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id }, 
+        { email: fetchedUser.email, userId: fetchedUser._id },
         "A_very_long_string_for_our_secret", 
-        { expiresIn: "1h" } 
+        { expiresIn: "1h" }
       );
 
-     
-      res.status(200).json({
-        token: token, 
-        expiresIn: 3600, 
-        userId: fetchedUser._id 
-      });
+      if (!res.headersSent) {  
+        return res.status(200).json({
+          token: token,
+          expiresIn: 3600,
+          userId: fetchedUser._id
+        });
+      }
     })
     .catch(err => {
-      return res.status(401).json({
-        message: "Auth failed"
-      });
+      if (!res.headersSent) {  
+        return res.status(401).json({
+          message: "Auth failed"
+        });
+      }
     });
 });
 

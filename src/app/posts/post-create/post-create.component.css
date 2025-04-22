@@ -1,4 +1,4 @@
-/* Centering the mat-card */
+
 mat-card {
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@ mat-card {
   padding: 20px;
 }
 
-/* Styling the form container */
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -19,18 +19,17 @@ mat-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
 }
 
-/* mat-form-field input field spacing */
+
 mat-form-field {
   margin-bottom: 16px;  
-  width: 100%;  /* Full-width input for better alignment */
+  width: 100%;  
 }
 
 mat-error {
   color: red;  
-  font-size: 12px;  /* Make error text slightly smaller */
+  font-size: 12px;  
 }
 
-/* Button styling with consistent margins */
 button {
   margin-top: 16px;
 }
@@ -39,11 +38,11 @@ input[type="file"] {
   visibility: hidden;  
 }
 
-/* Image preview container */
+
 .image-preview {
   display: flex;
   align-items: center;
-  justify-content: center;  /* Center image inside the preview box */
+  justify-content: center;  
   margin: 10px auto;
   width: 100%;
   max-width: 400px;
@@ -60,7 +59,7 @@ input[type="file"] {
   object-fit: cover;
 }
 
-/* Centering and adding spacing to the file picker button */
+
 .picker {
   display: flex;
   justify-content: center;
@@ -72,11 +71,11 @@ button[mat-stroked-button] {
   border-color: white;
 }
 
-/* Text input fields inside mat-form-field */
+
 input[matInput], textarea[matInput] {
-  color: white;  /* Text color for input fields */
+  color: white; 
 }
 
 input::placeholder, textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);  /* Lighter placeholder text */
+  color: rgba(255, 255, 255, 0.7); 
 }

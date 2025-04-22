@@ -19,17 +19,12 @@ export class LoginComponent {
     }
 
     this.Loading = true;
-
     const email = form.value.email;
     const password = form.value.password;
-
     console.log('Email:', email);
     console.log('Password:', password);
+    this.authService.login(email, password);
 
-    // Call the loginUser method from AuthService
-    this.authService.loginUser(email, password);
-
-    // Simulate API call completion
     setTimeout(() => {
       this.Loading = false;
       alert("Logged in successfully (simulation)");

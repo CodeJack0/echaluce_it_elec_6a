@@ -1,26 +1,29 @@
 <mat-card>
   <div *ngIf="Loading" class="spinner-container">
-    <mat-spinner diameter="50"></mat-spinner> <!-- Spinner with diameter of 50px -->
+    <mat-spinner diameter="50"></mat-spinner> 
   </div>
-    <mat-accordion multi="true" *ngIf="posts.length >= 0">
-      <mat-expansion-panel *ngFor="let post of posts">
-        <mat-expansion-panel-header>{{ post.title }}</mat-expansion-panel-header>
-        <div class="post-image">
-          <img [src]="post.imagePath" [alt]="post.title" class="small-image" />
-        </div>
-        <p>{{ post.content }}</p>
-        <mat-action-row>
-          <a mat-flat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
-          <button mat-flat-button color="primary" (click)="onDelete(post.id)">DELETE</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <mat-paginator 
-    [length]= "totalposts" 
-    [pageSize]= "postperpage"  
-   [pageSizeOptions]= "pageSizeOption" 
-   (page)= "onChangedPage($event)">  
-</mat-paginator>  
-    <p *ngIf="posts.length <= 0">No post added yet</p> 
-  </mat-card>
-  
+
+  <mat-accordion multi="true" *ngIf="posts.length >= 0">
+    <mat-expansion-panel *ngFor="let post of posts">
+      <mat-expansion-panel-header>{{ post.title }}</mat-expansion-panel-header>
+      <div class="post-image">
+        <img [src]="post.imagePath" [alt]="post.title" class="small-image" />
+      </div>
+      <p>{{ post.content }}</p>
+
+      
+      <mat-action-row *ngIf="userIsAuthenticated"> 
+        <a mat-flat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+        <button mat-flat-button color="primary" (click)="onDelete(post.id)">DELETE</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-paginator 
+    [length]="totalposts" 
+    [pageSize]="postperpage"  
+    [pageSizeOptions]="pageSizeOption" 
+    (page)="onChangedPage($event)">
+  </mat-paginator>  
+
+  <p *ngIf="posts.length <= 0">No post added yet</p> 
+</mat-card>

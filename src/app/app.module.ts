@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {ReactiveFormsModule} from '@angular/forms'; 
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';   
+import { AuthService } from './authentication/auth.service';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
     HeaderComponent,
     PostListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+
   ],
   imports: [
     AppRoutingModule,
@@ -51,10 +53,12 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [{
+  providers: [
+    AuthService,
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true  
+    multi: true
   }],
   bootstrap: [AppComponent]
 })

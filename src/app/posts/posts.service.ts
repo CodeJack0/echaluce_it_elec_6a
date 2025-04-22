@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 @Injectable({ providedIn: "root" })
 export class PostsService {
   private posts: Post[] = [];
-  private postsUpdated = new Subject<{ posts: Post[], totalPosts: number }>(); // Corrected here
+  private postsUpdated = new Subject<{ posts: Post[], totalPosts: number }>(); 
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -32,8 +32,8 @@ export class PostsService {
         })
       )
       .subscribe((data) => {
-        this.posts = data.posts; // Now this.posts is assigned from data.posts
-        this.postsUpdated.next({ posts: this.posts, totalPosts: data.totalPosts }); // Corrected reference to totalPosts
+        this.posts = data.posts; 
+        this.postsUpdated.next({ posts: this.posts, totalPosts: data.totalPosts }); 
       });
   }
   
