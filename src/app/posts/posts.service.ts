@@ -1,4 +1,3 @@
-// PostsService
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Post } from "./post.model";
@@ -26,23 +25,25 @@ export class PostsService {
               title: post.title,
               content: post.content,
               imagePath: post.imagePath,
+              creator: post.creator || null,  // Make sure creator is handled as string or null
             })),
-            totalPosts: postData.totalPosts
+            totalPosts: postData.totalPosts,
           };
         })
       )
-      .subscribe((data) => {
-        this.posts = data.posts; 
-        this.postsUpdated.next({ posts: this.posts, totalPosts: data.totalPosts }); 
+      .subscribe((transformedPostsData) => {
+        console.log(transformedPostsData);  
+        this.posts = transformedPostsData.posts; 
+        this.postsUpdated.next({ posts: this.posts, totalPosts: transformedPostsData.totalPosts }); 
       });
   }
-  
+
   getPostUpdatedListener() {
     return this.postsUpdated.asObservable();
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; imagePath: string }>(
+    return this.http.get<{ _id: string; title: string; content: string; imagePath: string; creator: string | null }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
@@ -59,6 +60,7 @@ export class PostsService {
         title: title,
         content: content,
         imagePath: response.post.imagePath,
+        creator: response.post.creator || null,  // Ensure creator is handled properly
       };
       this.posts.push(newPost);
       this.postsUpdated.next({ posts: [...this.posts], totalPosts: this.posts.length });
@@ -76,7 +78,13 @@ export class PostsService {
       postData.append("content", content);
       postData.append("image", image, image.name);
     } else {
-      postData = { id, title, content, imagePath: image };
+      postData = { 
+        id, 
+        title, 
+        content, 
+        imagePath: image,
+        creator: null,  // Handling creator as null
+      };
     }
 
     this.http.put<{ message: string; imagePath?: string }>(
@@ -92,6 +100,7 @@ export class PostsService {
           title,
           content,
           imagePath: response.imagePath || (typeof image === "string" ? image : updatedPosts[index].imagePath),
+          creator: updatedPosts[index].creator || null,  // Ensure creator is maintained
         };
       }
 

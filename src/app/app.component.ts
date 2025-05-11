@@ -7,6 +7,8 @@ import { AuthService } from './authentication/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title = 'Iechaluce';  // Add this property
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {

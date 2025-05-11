@@ -72,7 +72,7 @@ router.post("/login", (req, res, next) => {
     .catch(err => {
       if (!res.headersSent) {  
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Invalid Authentication Credentials!"  
         });
       }
     });

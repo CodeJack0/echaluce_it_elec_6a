@@ -12,7 +12,7 @@ import { mimetype } from "./mime-type.validators";
   styleUrls: ["./post-create.component.css"],
 })
 export class PostCreateComponent implements OnInit {
-  post: Post = { id: '', title: '', content: '', imagePath: '' };
+  post: Post = { id: '', title: '', content: '', imagePath: '', creator: ''};
   mode = 'create';
   postId: string | any;
   isLoading = false;
@@ -55,19 +55,21 @@ export class PostCreateComponent implements OnInit {
               id: postData._id,
               title: postData.title,
               content: postData.content,
-              imagePath: postData.imagePath
+              imagePath: postData.imagePath,
+              creator: postData.creator  
             };
             this.form.setValue({
               title: this.post.title,
               content: this.post.content,
-              image: this.post.imagePath
+              image: this.post.imagePath,
+              creator: this.post.creator  
             });
           });
         }
       } else {
         this.mode = 'create';
         this.postId = null;
-        this.post = { id: '', title: '', content: '', imagePath: '' };
+        this.post = { id: '', title: '', content: '', imagePath: '', creator: ''};
       }
     });
   }

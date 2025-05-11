@@ -17,3 +17,17 @@
     height: 100px; /* Adjust as needed */
   }
   
+  .search-sort-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .search-bar,
+  .sort-bar {
+    flex: 1;
+    min-width: 200px;
+  }
+  

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserModule } from '@angular/platform-browser';  
 import { AppComponent } from './app.component';
 import {PostCreateComponent} from './posts/post-create/post-create.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,11 +18,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {ReactiveFormsModule} from '@angular/forms'; 
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';   
 import { AuthService } from './authentication/auth.service';
+import { ErrorInterceptor } from './error-interceptor'; 
+import{MatDialogModule} from '@angular/material/dialog'; 
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -34,7 +37,7 @@ import { AuthService } from './authentication/auth.service';
     PostListComponent,
     LoginComponent,
     SignupComponent,
-
+    ErrorComponent
   ],
   imports: [
     AppRoutingModule,
@@ -51,15 +54,19 @@ import { AuthService } from './authentication/auth.service';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+   
+   ],
+
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {}

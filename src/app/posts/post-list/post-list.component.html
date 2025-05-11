@@ -1,23 +1,41 @@
 <mat-card>
+  <div class="search-sort-container">
+    <mat-form-field appearance="fill" class="search-bar">
+      <mat-label>Search posts</mat-label>
+      <input matInput type="text" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Enter keyword..." />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="sort-bar">
+      <mat-label>Sort by</mat-label>
+      <mat-select [(value)]="selectedSort" (selectionChange)="onSortChange()">
+        <mat-option value="titleAsc">Title A-Z</mat-option>
+        <mat-option value="titleDesc">Title Z-A</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+ 
+  <button mat-raised-button color="primary" (click)="exportToCSV()">Export to CSV</button>
+
   <div *ngIf="Loading" class="spinner-container">
     <mat-spinner diameter="50"></mat-spinner> 
   </div>
 
-  <mat-accordion multi="true" *ngIf="posts.length >= 0">
-    <mat-expansion-panel *ngFor="let post of posts">
+  <mat-accordion multi="true" *ngIf="filteredPosts.length > 0">
+    <mat-expansion-panel *ngFor="let post of filteredPosts">
       <mat-expansion-panel-header>{{ post.title }}</mat-expansion-panel-header>
       <div class="post-image">
         <img [src]="post.imagePath" [alt]="post.title" class="small-image" />
       </div>
       <p>{{ post.content }}</p>
-
-      
-      <mat-action-row *ngIf="userIsAuthenticated"> 
+    
+      <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator"> 
         <a mat-flat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
         <button mat-flat-button color="primary" (click)="onDelete(post.id)">DELETE</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
+
   <mat-paginator 
     [length]="totalposts" 
     [pageSize]="postperpage"  
@@ -25,5 +43,6 @@
     (page)="onChangedPage($event)">
   </mat-paginator>  
 
-  <p *ngIf="posts.length <= 0">No post added yet</p> 
+  <!-- No Posts Found -->
+  <p *ngIf="filteredPosts.length === 0 && !Loading">No posts found</p> 
 </mat-card>
